@@ -18,10 +18,16 @@ let contacto = document.getElementById("contacto")
 let cTotal = document.getElementById("cTotal")
 let cDisponible = document.getElementById("cDisponible")
 let diasGracia = document.getElementById("diasGracia")
+localStorage.setItem("id",0)
 
 guardar.addEventListener("click", () => {
+    let idCliente = localStorage.id
+    let cliente = [nombre.value,apellido.value,NIT.value,direccion.value,ciudad.value, telefono.value,contacto.value,cDisponible.value,cTotal.value, diasGracia.value]
+    // let cliente = {"nombre" :nombre.value, "apellido":apellido.value, "NIT":NIT.value, "direccion":direccion.value,"ciudad":ciudad.value, "telefono":telefono.value, "contacto":contacto.value, "cDisponible":cDisponible.value, "cTotal":cTotal.value,"diasGracia": diasGracia.value}
+    localStorage.setItem(idCliente, cliente)
+ 
     
-        tabla.innerHTML += `<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+    tabla.innerHTML += `<tr class="hover:bg-gray-100 dark:hover:bg-gray-700" id="${idCliente}" >
       
       <td class="py-4 px-6 text-sm font-medium text-gray-900 text-center whitespace-nowrap dark:text-white">${nombre.value}</td> 
       <td class="py-4 px-6 text-sm font-medium text-gray-500 text-center whitespace-nowrap dark:text-white">${apellido.value}</td>
@@ -47,9 +53,10 @@ guardar.addEventListener("click", () => {
   </button></td>
 
     </tr> `
+    localStorage.id++
     modal.classList.remove("scale-100")
-    
-    
+
+
     nombre.value = ""
     apellido.value = ""
     NIT.value = ""
@@ -58,10 +65,15 @@ guardar.addEventListener("click", () => {
     telefono.value = ""
     contacto.value = ""
     cDisponible.value = ""
+    cTotal.value = ""
+    diasGracia.value = ""
 })
-function eliminar(elemento){
+function eliminar(elemento) {
+    console.log(elemento.parentElement.parentElement.id)
+    localStorage.removeItem(elemento.parentElement.parentElement.id)
     elemento.parentElement.parentElement.remove()
+    
 }
-function editar(elemento){
+function editar(elemento) {
 
 }
